@@ -125,6 +125,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+LOGIN_REDIRECT_URL = 'home'
+
 # set database URL based on DATABASE_URL environment var
 DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
