@@ -1,5 +1,12 @@
 # dna-search
 
+## Configuration
+* Install required packages `pip install -r requirements.txt` 
+* Set `DATABASE_URL` environment variable accordingly
+* Run database migrations via `python manage.py migrate`
+* Create a user via `python manage.py createsuperuser`
+    * Here our user  is `admin:ginkgobioworks`
+* 
 
 ## Stuff to build
 
