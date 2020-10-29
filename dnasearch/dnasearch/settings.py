@@ -1,4 +1,5 @@
 import django_heroku
+import dj_database_url
 
 """
 Django settings for dnasearch project.
@@ -76,12 +77,14 @@ WSGI_APPLICATION = 'dnasearch.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
+DATABASES = dict()
+'''
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
-}
+'''
+
 
 
 # Password validation
@@ -121,6 +124,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# set database URL based on DATABASE_URL environment var
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
