@@ -18,9 +18,12 @@ from django.urls import path
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
 from django.views.generic.base import TemplateView
+from dnasearch.dnasearch_app import views
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
+    path('user-searches/', views.get_user_searches),
+    path('start-search/', views.start_dna_search),
     url(r'^login/$', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     url(r'^logout/$', auth_views.LogoutView.as_view(template_name='home.html'), {'next_page': '/'}, name='logout'),
     path('admin/', admin.site.urls),
