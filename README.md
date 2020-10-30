@@ -6,7 +6,7 @@
 * Run database migrations via `python manage.py migrate`
 * Create a user via `python manage.py createsuperuser`
     * Here our user  is `admin:ginkgobioworks`
-* 
+* Add the heroku worker via `heroku scale worker=1`
 
 ## Stuff to build
 

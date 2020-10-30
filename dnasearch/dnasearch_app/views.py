@@ -1,3 +1,4 @@
+import django_rq
 from django.shortcuts import render
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -7,8 +8,10 @@ from dnasearch.dnasearch_app.models import DnaSearchRequest
 from dnasearch.dnasearch_app.serializers import DnaSearchSerializer
 from dnasearch.dnasearch_app.serializers import DnaSearchRequestSerializer
 from datetime import datetime
+from dnasearch.dnasearch_app.dna_search_task import dna_search_task
 
 VALID_DNA_CHARS: set = {'a', 'c', 't', 'g'}
+
 
 # Create your views here.
 
@@ -47,17 +50,21 @@ def start_dna_search(request) -> Response:
         search_string=normalized_search_string,
     )
 
-    # enqueue to RQ first, ensuring anything in the DB is actually executing somewhere
-
-    # write to DB
+    # write to DB first so we can have an ID to hand to RQ
     dna_search.save()
+
+    # enqueue to RQ
+    queue = django_rq.get_queue('default', autocommit=True, is_async=True, default_timeout=360)
+    queue.enqueue(dna_search_task, dna_search)
 
     # return success and enqueued search
     dna_search_serializer = DnaSearchSerializer(dna_search)
     return Response(dna_search_serializer.data, status=status.HTTP_200_OK)
 
+
 def normalize_search_string(search_string: str) -> str:
     return search_string.strip().lower()
+
 
 def validate_search_string(search_string: str) -> Response:
     for c in search_string:

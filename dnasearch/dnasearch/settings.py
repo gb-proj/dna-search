@@ -1,5 +1,6 @@
 import django_heroku
 import dj_database_url
+import os
 
 """
 Django settings for dnasearch project.
@@ -40,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'dnasearch_app'
+    'dnasearch_app',
+    'django_rq',
 ]
 
 MIDDLEWARE = [
@@ -85,6 +87,15 @@ DATABASES = dict()
     }
 '''
 
+# set database URL based on DATABASE_URL environment var
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+
+RQ_QUEUES = {
+    'default': {
+        'URL': os.getenv('REDIS_URL'),
+        'DEFAULT_TIMEOUT': 360,
+    }
+}
 
 
 # Password validation
@@ -127,8 +138,6 @@ STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = 'home'
 
-# set database URL based on DATABASE_URL environment var
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
