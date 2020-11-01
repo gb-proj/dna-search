@@ -1,0 +1,151 @@
+LOCUS       NC_023640            1244621 bp    DNA     linear   VRL 06-MAR-2014
+DEFINITION  Megavirus terra1 genome.
+ACCESSION   NC_023640
+VERSION     NC_023640.1
+KEYWORDS    RefSeq.
+SOURCE      Megavirus terra1
+  ORGANISM  Megavirus terra1
+            Viruses; dsDNA viruses, no RNA stage; Mimiviridae; unclassified
+            Mimiviridae.
+REFERENCE   1  (bases 1 to 1244621)
+  AUTHORS   Yoosuf,N., Pagnier,I., Fournous,G., Robert,C., Raoult,D., La
+            Scola,B. and Colson,P.
+  TITLE     Draft genome sequences of Terra1 and Terra2 viruses, new members of
+            the family Mimiviridae isolated from soil
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 1244621)
+  CONSRTM   NCBI Genome Project
+  TITLE     Direct Submission
+  JOURNAL   Submitted (06-MAR-2014) National Center for Biotechnology
+            Information, NIH, Bethesda, MD 20894, USA
+REFERENCE   3  (bases 1 to 1244621)
+  AUTHORS   Yoosuf,N., Pagnier,I., Fournous,G., Robert,C., Raoult,D., La
+            Scola,B. and Colson,P.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (08-AUG-2013) URMITE, Aix Marseille University, bd Jean
+            Moulin, Marseille, PACA 13005, France
+COMMENT     PROVISIONAL REFSEQ: This record has not yet been subject to final
+            NCBI review. The reference sequence is identical to KF527229.
+            [WARNING] On Aug 1, 2016 this sequence was replaced by NC_016072.1.
+            COMPLETENESS: full length.
+FEATURES             Location/Qualifiers
+     source          1..1244621
+                     /organism="Megavirus terra1"
+                     /mol_type="genomic DNA"
+                     /isolate="Terra1"
+                     /isolation_source="soil"
+                     /host="Acanthamoeba polyphaga"
+                     /db_xref="taxon:1128143"
+                     /country="France: Marseille"
+                     /collection_date="Mar-2009"
+     assembly_gap    1187..1187
+                     /estimated_length=1
+                     /gap_type="within scaffold"
+                     /linkage_evidence="paired-ends"
+     assembly_gap    1225..1324
+                     /estimated_length=unknown
+                     /gap_type="within scaffold"
+                     /linkage_evidence="paired-ends"
+     assembly_gap    2123..2123
+                     /estimated_length=1
+                     /gap_type="within scaffold"
+                     /linkage_evidence="paired-ends"
+     assembly_gap    2403..2502
+                     /estimated_length=unknown
+                     /gap_type="within scaffold"
+                     /linkage_evidence="paired-ends"
+     assembly_gap    3533..3632
+                     /estimated_length=unknown
+                     /gap_type="within scaffold"
+                     /linkage_evidence="paired-ends"
+     assembly_gap    4729..4828
+                     /estimated_length=unknown
+                     /gap_type="within scaffold"
+                     /linkage_evidence="paired-ends"
+     assembly_gap    519028..519028
+                     /estimated_length=1
+                     /gap_type="within scaffold"
+                     /linkage_evidence="paired-ends"
+     assembly_gap    519147..519147
+                     /estimated_length=1
+                     /gap_type="within scaffold"
+                     /linkage_evidence="paired-ends"
+     assembly_gap    519157..519157
+                     /estimated_length=1
+                     /gap_type="within scaffold"
+                     /linkage_evidence="paired-ends"
+     assembly_gap    519172..519172
+                     /estimated_length=1
+                     /gap_type="within scaffold"
+                     /linkage_evidence="paired-ends"
+     assembly_gap    519263..519362
+                     /estimated_length=unknown
+                     /gap_type="within scaffold"
+                     /linkage_evidence="paired-ends"
+     assembly_gap    903801..903901
+                     /estimated_length=101
+                     /gap_type="within scaffold"
+                     /linkage_evidence="paired-ends"
+     assembly_gap    903916..903916
+                     /estimated_length=1
+                     /gap_type="within scaffold"
+                     /linkage_evidence="paired-ends"
+     assembly_gap    904001..904001
+                     /estimated_length=1
+                     /gap_type="within scaffold"
+                     /linkage_evidence="paired-ends"
+     assembly_gap    904005..904005
+                     /estimated_length=1
+                     /gap_type="within scaffold"
+                     /linkage_evidence="paired-ends"
+     assembly_gap    936327..936426
+                     /estimated_length=unknown
+                     /gap_type="within scaffold"
+                     /linkage_evidence="paired-ends"
+     assembly_gap    982152..982251
+                     /estimated_length=unknown
+                     /gap_type="within scaffold"
+                     /linkage_evidence="paired-ends"
+     assembly_gap    983874..983973
+                     /estimated_length=unknown
+                     /gap_type="within scaffold"
+                     /linkage_evidence="paired-ends"
+     assembly_gap    983978..983978
+                     /estimated_length=1
+                     /gap_type="within scaffold"
+                     /linkage_evidence="paired-ends"
+     assembly_gap    983980..983980
+                     /estimated_length=1
+                     /gap_type="within scaffold"
+                     /linkage_evidence="paired-ends"
+     assembly_gap    983983..983983
+                     /estimated_length=1
+                     /gap_type="within scaffold"
+                     /linkage_evidence="paired-ends"
+     assembly_gap    983991..983991
+                     /estimated_length=1
+                     /gap_type="within scaffold"
+                     /linkage_evidence="paired-ends"
+     assembly_gap    984048..984048
+                     /estimated_length=1
+                     /gap_type="within scaffold"
+                     /linkage_evidence="paired-ends"
+     assembly_gap    984050..984050
+                     /estimated_length=1
+                     /gap_type="within scaffold"
+                     /linkage_evidence="paired-ends"
+     assembly_gap    984052..984053
+                     /estimated_length=2
+                     /gap_type="within scaffold"
+                     /linkage_evidence="paired-ends"
+     assembly_gap    1051495..1051594
+                     /estimated_length=unknown
+                     /gap_type="within scaffold"
+                     /linkage_evidence="paired-ends"
+     assembly_gap    1204392..1204491
+                     /estimated_length=unknown
+                     /gap_type="within scaffold"
+                     /linkage_evidence="paired-ends"
+ORIGIN      
+//
+
