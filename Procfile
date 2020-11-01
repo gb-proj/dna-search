@@ -1,3 +1,3 @@
-web: gunicorn --pythonpath="$PWD/dnasearch" config.wsgi:application
+web: gunicorn dnasearch.dnasearch.wsgi
 
 worker: python dnasearch/manage.py rqworker default
