@@ -1,5 +1,5 @@
 import random
-from dnasearch.dnasearch_app.models import DnaSearch
+from dnasearch_app.models import DnaSearch
 from datetime import datetime
 from Bio import SeqIO
 from Bio import Seq

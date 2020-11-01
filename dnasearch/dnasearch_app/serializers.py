@@ -1,5 +1,7 @@
-from dnasearch.dnasearch_app.models import DnaSearch, DnaSearchRequest
+from dnasearch_app.models import DnaSearch
+from dnasearch_app.models import DnaSearchRequest
 from rest_framework import serializers
+
 
 class DnaSearchRequestSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -7,6 +9,7 @@ class DnaSearchRequestSerializer(serializers.HyperlinkedModelSerializer):
         fields = [
             'search_string',
         ]
+
 
 class DnaSearchSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

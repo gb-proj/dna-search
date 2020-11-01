@@ -3,12 +3,12 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from dnasearch.dnasearch_app.models import DnaSearch
-from dnasearch.dnasearch_app.models import DnaSearchRequest
-from dnasearch.dnasearch_app.serializers import DnaSearchSerializer
-from dnasearch.dnasearch_app.serializers import DnaSearchRequestSerializer
+from dnasearch_app.models import DnaSearch
+from dnasearch_app.models import DnaSearchRequest
+from dnasearch_app.serializers import DnaSearchSerializer
+from dnasearch_app.serializers import DnaSearchRequestSerializer
 from datetime import datetime
-from dnasearch.dnasearch_app.dna_search_task import dna_search_task
+from dnasearch_app.dna_search_task import dna_search_task
 
 VALID_DNA_CHARS: set = {'A', 'C', 'T', 'G'}
 
