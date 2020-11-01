@@ -45,9 +45,48 @@ function loadUserSearches() {
     .then(function (response) {
         response.json().then(function(json) {
             let table = document.getElementById("dna_search_results");
-            table.innerHTML = JSON.stringify(json);
+            table.innerHTML = buildTableRows(json);
         });
     });
+}
+
+let TABLE_HEADER = `
+<tr>
+  <th>Search State</th>
+  <th>Search String</th>
+  <th>Stared At</th>
+  <th>Completed At</th>
+  <th>Protein</th>
+  <th>Start Location</th>
+  <th>End Location</th>
+</tr>
+`
+
+function buildTableRows(records) {
+    // search_state, started_at, completed_at, result_protein, result_start_location, result_end_location
+    return TABLE_HEADER + records.map(r => buildTableRow(r)).join('\n');
+}
+
+function buildTableRow(record) {
+    let searchState = record['search_state'];
+    let searchString = record['search_string'];
+    let startedAt = record['started_at'];
+    let completedAt = record['completed_at'] || '';
+    let resultProtein = record['result_protein'] || '';
+    let startLocation = record['result_start_location'] || '';
+    let endLocation = record['result_end_location'] || '';
+
+    return `
+<tr>
+  <td>${searchState}</td>
+  <td>${searchString}</td>
+  <td>${startedAt}</td>
+  <td>${completedAt}</td>
+  <td>${resultProtein}</td>
+  <td>${startLocation}</td>
+  <td>${endLocation}</td>
+</tr>
+`;
 }
 
 // Django-provided method to resolve csrf cookie
