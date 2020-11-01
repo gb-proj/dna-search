@@ -10,7 +10,7 @@ from dnasearch.dnasearch_app.serializers import DnaSearchRequestSerializer
 from datetime import datetime
 from dnasearch.dnasearch_app.dna_search_task import dna_search_task
 
-VALID_DNA_CHARS: set = {'a', 'c', 't', 'g'}
+VALID_DNA_CHARS: set = {'A', 'C', 'T', 'G'}
 
 
 # Create your views here.
@@ -44,7 +44,7 @@ def start_dna_search(request) -> Response:
 
     # transform to DnaSearch
     dna_search = DnaSearch(
-        search_state=DnaSearch.SEARCH_STATES.STARTED,
+        search_state='SEARCHING',
         user_id=request.user.id,
         started_at=datetime.now(),
         search_string=normalized_search_string,
@@ -63,7 +63,7 @@ def start_dna_search(request) -> Response:
 
 
 def normalize_search_string(search_string: str) -> str:
-    return search_string.strip().lower()
+    return search_string.strip().upper()
 
 
 def validate_search_string(search_string: str) -> Response:

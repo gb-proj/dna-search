@@ -16,7 +16,7 @@ class DnaSearch(models.Model):
         ('ERROR', 'Error'),
     )
 
-    search_state = models.CharField(max_length=8, choices=SEARCH_STATES)
+    search_state = models.CharField(max_length=16, choices=SEARCH_STATES)
 
     user_id = models.ForeignKey(auth.get_user_model(), on_delete=models.CASCADE)
     started_at = models.DateTimeField('datetime search was started')
