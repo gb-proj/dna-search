@@ -3,12 +3,27 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-  <h2>Home</h2>
-  <p>
-    {% if user.is_authenticated %}
+<h2>Home</h2>
+
+{% if user.is_authenticated %}
+<p>
     Welcome {{ user.username }}!
-    {% else %}
+</p>
+<h3>Start a DNA Search</h3>
+<form>
+    <label for="search_string">DNA Search String (eg. ACTG)</label>
+    <br/>
+    <textarea name="search_string" id="search_string"> </textarea>
+    <br/>
+    <button>Search</button>
+</form>
+<h3>DNA Searches</h3>
+<table id="dna_search_results">
+
+</table>
+{% else %}
+<p>
     We don't recognize you, login to search some DNA.
-    {% endif %}
-  </p>
+</p>
+{% endif %}
 {% endblock %}

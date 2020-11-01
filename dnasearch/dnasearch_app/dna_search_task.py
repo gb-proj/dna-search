@@ -18,7 +18,7 @@ PROTEIN_LIST: list = [
     'NC_027867',
 ]
 
-PROTEIN_DATA_FILE_TEMPLATE = "./protein_data/{}.gb"
+PROTEIN_DATA_FILE_TEMPLATE = "./dnasearch/dnasearch_app/protein_data/{}.gb"
 
 
 def dna_search_task(dna_search: DnaSearch):

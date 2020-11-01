@@ -20,10 +20,10 @@ class DnaSearch(models.Model):
 
     user_id = models.ForeignKey(auth.get_user_model(), on_delete=models.CASCADE)
     started_at = models.DateTimeField('datetime search was started')
-    completed_at = models.DateTimeField('datetime search was completed')
+    completed_at = models.DateTimeField('datetime search was completed', null=True)
 
     search_string = models.TextField()
 
-    result_protein = models.TextField()
-    result_start_location = models.IntegerField()
-    result_end_location = models.IntegerField()
+    result_protein = models.TextField(null=True)
+    result_start_location = models.IntegerField(null=True)
+    result_end_location = models.IntegerField(null=True)
