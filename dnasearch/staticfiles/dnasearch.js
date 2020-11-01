@@ -3,15 +3,13 @@
 const csrftoken = getCookie('csrftoken');
 
 // load user searches on page load
-fetch("/user-searches/")
-.then(function (response) {
-    response.json().then(function(json) {
-        let table = document.getElementById("dna_search_results");
-        table.innerHTML = JSON.stringify(json);
-    });
-});
+loadUserSearches()
 
-// autorefresh
+// autorefresh every 5s
+window.onload = startInterval;
+function startInterval() {
+    setInterval("loadUserSearches();", 5000);
+}
 
 // add form event listener to submit a new search
 document.addEventListener('submit', function (event) {
@@ -37,8 +35,20 @@ document.addEventListener('submit', function (event) {
 	}).catch(function (error) {
 		console.warn(error);
 	});
+
+	loadUserSearches();
 });
 
+// function to fetch searches for the current user
+function loadUserSearches() {
+    fetch("/user-searches/")
+    .then(function (response) {
+        response.json().then(function(json) {
+            let table = document.getElementById("dna_search_results");
+            table.innerHTML = JSON.stringify(json);
+        });
+    });
+}
 
 // Django-provided method to resolve csrf cookie
 function getCookie(name) {
