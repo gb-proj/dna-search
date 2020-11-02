@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Login{% endblock %}
 
 {% block content %}
 {% if user.is_authenticated %}
+<script src="{% static "dnasearch.js" %}"></script>
 <h3 class="subtitle">Start a DNA Search</h3>
 <form id="dna_search_form">
     <label for="search_string">DNA Search String (eg. ACTG)</label>

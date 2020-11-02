@@ -21,7 +21,7 @@ def get_user_searches(request) -> Response:
         .filter(user_id=current_user_id) \
         .order_by('-started_at')
 
-    dna_search_serializer = DnaSearchSerializer(current_user_searches, many=True, context={'request': request})
+    dna_search_serializer: DnaSearchSerializer = DnaSearchSerializer(current_user_searches, many=True, context={'request': request})
 
     return Response(dna_search_serializer.data)
 
@@ -38,14 +38,14 @@ def start_dna_search(request) -> Response:
     dna_search_request: DnaSearchRequest = dna_search_request_serializer.save()
 
     # normalize + validate search string
-    normalized_search_string = normalize_search_string(dna_search_request.search_string)
+    normalized_search_string: str = normalize_search_string(dna_search_request.search_string)
 
-    error_response = validate_search_string(normalized_search_string)
+    error_response: Response = validate_search_string(normalized_search_string)
     if error_response is not None:
         return error_response
 
     # transform to DnaSearch
-    dna_search = DnaSearch(
+    dna_search: DnaSearch = DnaSearch(
         search_state='SEARCHING',
         user_id=request.user,
         started_at=datetime.now(),
