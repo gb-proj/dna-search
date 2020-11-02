@@ -8,7 +8,7 @@ This application in running in production at [https://dna-searcher.herokuapp.com
 * And a third unused user `another-scientist:ginkgobioworks`
 
 ## Setup
-* Install [Python 3](https://www.python.org/downloads/) and [Heroku](https://devcenter.heroku.com/articles/heroku-cli)
+* Install [Python 3](https://www.python.org/downloads/), [Heroku](https://devcenter.heroku.com/articles/heroku-cli), and [PostgreSQL](https://www.postgresql.org/download/)
 * Clone this repository
 * Create a virtualenv for the project:
   * `python3 -m venv virtual-environment`
