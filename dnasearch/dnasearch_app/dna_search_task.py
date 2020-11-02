@@ -25,15 +25,20 @@ PROTEIN_LIST: list = [
 
 
 def dna_search_task(dna_search: DnaSearch):
+    print("got task" + str(dna_search))
     # generate a random ordering of proteins to search through
     protein_search_order = PROTEIN_LIST[:]
     random.shuffle(protein_search_order)
+    print("Determined protein order" + str(protein_search_order))
 
     # for each of protein in the random order perform a search
     for protein in protein_search_order:
+        print("searching " + str(protein) + " for " + str(dna_search.search_string))
         # load protein data from genbank file
         seq_record: SeqRecord = SeqIO.read(PROTEIN_DATA_FILE_TEMPLATE.format(protein), "genbank")
         seq: Seq = seq_record.seq.upper()
+
+        print("read seq data for " + str(protein))
 
         # search for matching substring
         idx: int = seq.find(dna_search.search_string)
@@ -49,8 +54,11 @@ def dna_search_task(dna_search: DnaSearch):
             dna_search_to_update.save()
             return
 
+    print("no results found in proteins for " + str(dna_search.search_string))
+
     # if no results were found, update the database accordingly
     not_found_dna_search_to_update: DnaSearch = DnaSearch.objects.get(pk=dna_search.pk)
     not_found_dna_search_to_update.search_state = 'NOT_FOUND'
     not_found_dna_search_to_update.completed_at = datetime.now()
     not_found_dna_search_to_update.save()
+    print("updated db for search " + str(dna_search.search_string))
