@@ -39,17 +39,28 @@ Complete the steps above and finally:
   * `git push heroku main`
 * Start the RQ worker via `heroku scale worker=1`
 
-## Stuff to build
+## Functionality/design
 
-- Pages
-  - Login page
-  - Dna search page to enable new searches and display results
-  - Logout page/link
-- Task queue using rq for dna searches
-- Database model of DNA search results
-- Database (maybe) of DNA strings to search
-  - Maybe just hardcode for now, see how time goes
-  
+This application uses Django, Redis, RQ (Redis Queue), and Postgres to implement the requirements for the DNA searching application. 
+
+On the frontend we use vanilla JavaScript to implement basic functionality of creating DNA search requests, listing requests for a user, and automatically reloading the requests for the current user every 5 seconds. 
+
+On the backend, we define a login view and a single view (`home.html`) for our logged-in state inside our application. These serve up the basic pages we require to the frontend. We also define two endpoints. The first is a GET endpoint `/user-searches/` to fetch all searches for the logged in user.
+
+User searches are modeled using the `DnaSearch` model. This model contains the basic information about a search: 
+* the state of the search 
+* the time it was started/completed
+* the user performing a search
+* the string being searched for
+* the resulting protein + offsets (if found)
+
+The second is a POST endpoint `/start-search/` to create new DNA search requests, which simply accepts an object consisting of a DNA string to search for. This object is translated into a `DnaSearch` for the current user, written to Postgres, and enqueued to an RQ queue for async processing.
+
+Our RQ worker (defined in `dna_search_task.py`) picks up this task, computes a random order of proteins to search, loads protein data protein-by-protein, and searches each protein sequence until either a match is found or there are no proteins left to search. At that point the database is updated with a result which the frontend will shortly fetch.
+
+Protein data is stored as flat genbank files which are loaded by the worker above one-by-one. The file format was arbitrarily chosen, but the flat storage was chosen for simplicity and also time constraints. This would extend fine to a fairly large set of protein data, and you could imagine trivially using something like S3/EBS instead of the packaged list of files here, but at some point we'd probably want to move to a better search strategy via some sort of indexed memory-based datastore. I also listed some other storage improvement ideas below that could make the system more efficient in practice, but which weren't implemented here due to time constraints.
+
+Users and login are managed via Django's built-in user and authentication mechanisms.
   
 ## Things that could be improved upon
 In general to complete this project in a reasonable amount of time, a number of corners were cut that wouldn't be in a true production application. Below lists some of the issues and improvements that would be made in practice:
