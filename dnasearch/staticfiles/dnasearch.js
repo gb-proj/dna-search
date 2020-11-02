@@ -1,6 +1,17 @@
 
+const CSRF_TOKEN = getCookie('csrftoken');
 
-const csrftoken = getCookie('csrftoken');
+let TABLE_HEADER = `
+<tr>
+  <th>Search State</th>
+  <th>Search String</th>
+  <th>Stared At</th>
+  <th>Completed At</th>
+  <th>Protein</th>
+  <th>Start Location</th>
+  <th>End Location</th>
+</tr>
+`
 
 // load user searches on page load
 loadUserSearches()
@@ -22,7 +33,7 @@ document.addEventListener('submit', function (event) {
 		method: 'POST',
         body: json_body,
 		headers: {
-            'X-CSRFToken': csrftoken,
+            'X-CSRFToken': CSRF_TOKEN,
 			'Content-type': 'application/json; charset=UTF-8'
 		}
 	}).then(function (response) {
@@ -36,10 +47,13 @@ document.addEventListener('submit', function (event) {
 		console.warn(error);
 	});
 
+    // clear form data
+	document.getElementById("dna_search_form").reset();
+
 	loadUserSearches();
 });
 
-// function to fetch searches for the current user
+// function to fetch searches for the current user and update the table listing them accordingly
 function loadUserSearches() {
     fetch("/user-searches/")
     .then(function (response) {
@@ -50,23 +64,12 @@ function loadUserSearches() {
     });
 }
 
-let TABLE_HEADER = `
-<tr>
-  <th>Search State</th>
-  <th>Search String</th>
-  <th>Stared At</th>
-  <th>Completed At</th>
-  <th>Protein</th>
-  <th>Start Location</th>
-  <th>End Location</th>
-</tr>
-`
-
+// function to generate table HTML based on dna search records
 function buildTableRows(records) {
-    // search_state, started_at, completed_at, result_protein, result_start_location, result_end_location
     return TABLE_HEADER + records.map(r => buildTableRow(r)).join('\n');
 }
 
+// function to generate a given row based on a dna search record
 function buildTableRow(record) {
     let searchState = record['search_state'];
     let searchString = record['search_string'];

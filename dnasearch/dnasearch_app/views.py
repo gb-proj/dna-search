@@ -13,8 +13,7 @@ from dnasearch_app.dna_search_task import dna_search_task
 VALID_DNA_CHARS: set = {'A', 'C', 'T', 'G'}
 
 
-# Create your views here.
-
+# endpoint to fetch dna searches for the current logged in user
 @api_view(['GET'])
 def get_user_searches(request) -> Response:
     current_user_id = request.user.id
@@ -24,13 +23,10 @@ def get_user_searches(request) -> Response:
 
     dna_search_serializer = DnaSearchSerializer(current_user_searches, many=True, context={'request': request})
 
-    # if not dna_search_serializer.is_valid():
-    # this should never happen, indicates mismatch between DB, model, and Serializer
-    # return Response(dna_search_serializer.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
     return Response(dna_search_serializer.data)
 
 
+# endpoint to start a new dna search for the current logged in user
 @api_view(['POST'])
 def start_dna_search(request) -> Response:
     # validate DnaSearchRequest

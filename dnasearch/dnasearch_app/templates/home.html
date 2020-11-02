@@ -5,7 +5,7 @@
 {% block content %}
 {% if user.is_authenticated %}
 <h3 class="subtitle">Start a DNA Search</h3>
-<form>
+<form id="dna_search_form">
     <label for="search_string">DNA Search String (eg. ACTG)</label>
     <br/>
     <textarea name="search_string" id="search_string"> </textarea>

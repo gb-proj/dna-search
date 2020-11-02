@@ -5,6 +5,11 @@ from Bio import SeqIO
 from Bio import Seq
 from Bio import SeqRecord
 
+# proteins are loaded statically from genbank files in the protein_data folder
+PROTEIN_DATA_FILE_TEMPLATE = "./dnasearch/dnasearch_app/protein_data/{}.gb"
+
+# new proteins can be added by adding a genbank file like NC_000852.gb to the protein_data folder
+# and adding a correspondingly named entry like NC_000852 to this list
 PROTEIN_LIST: list = [
     'NC_000852',
     'NC_007346',
@@ -18,17 +23,15 @@ PROTEIN_LIST: list = [
     'NC_027867',
 ]
 
-PROTEIN_DATA_FILE_TEMPLATE = "./dnasearch/dnasearch_app/protein_data/{}.gb"
-
 
 def dna_search_task(dna_search: DnaSearch):
     # generate a random ordering of proteins to search through
     protein_search_order = PROTEIN_LIST[:]
     random.shuffle(protein_search_order)
 
-    # for each of those proteins perform a search
+    # for each of protein in the random order perform a search
     for protein in protein_search_order:
-        # load protein data
+        # load protein data from genbank file
         seq_record: SeqRecord = SeqIO.read(PROTEIN_DATA_FILE_TEMPLATE.format(protein), "genbank")
         seq: Seq = seq_record.seq.upper()
 
@@ -46,10 +49,8 @@ def dna_search_task(dna_search: DnaSearch):
             dna_search_to_update.save()
             return
 
-    # finally if no results were found, update the database accordingly
+    # if no results were found, update the database accordingly
     not_found_dna_search_to_update: DnaSearch = DnaSearch.objects.get(pk=dna_search.pk)
     not_found_dna_search_to_update.search_state = 'NOT_FOUND'
     not_found_dna_search_to_update.completed_at = datetime.now()
     not_found_dna_search_to_update.save()
-
-    return

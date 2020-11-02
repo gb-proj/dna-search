@@ -1,13 +1,13 @@
 from django.db import models
 from django.contrib import auth
 
-
+# basic utility class for serialization to accept searches from the frontend
 class DnaSearchRequest(models.Model):
     search_string = models.TextField()
 
-# Create your models here.
+# fully-baked class to represent our DNA searches
 class DnaSearch(models.Model):
-    # represents the status of the current async search
+    # search states represent the status of the current async search
     # Starts in SEARCHING -> terminates in FOUND, NOT_FOUND, or ERROR depending on result
     SEARCH_STATES = (
         ('SEARCHING', 'Searching'),
@@ -19,8 +19,8 @@ class DnaSearch(models.Model):
     search_state = models.CharField(max_length=16, choices=SEARCH_STATES)
 
     user_id = models.ForeignKey(auth.get_user_model(), on_delete=models.CASCADE)
-    started_at = models.DateTimeField('datetime search was started')
-    completed_at = models.DateTimeField('datetime search was completed', null=True)
+    started_at = models.DateTimeField()
+    completed_at = models.DateTimeField(null=True)
 
     search_string = models.TextField()
 
